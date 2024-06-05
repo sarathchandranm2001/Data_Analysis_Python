@@ -1,9 +1,22 @@
 d={
+    "student1":{
     "name":"sarath",
       "age":23,
       "marks":{
           "english":70,
           "maths":69,
-      }#concatination of dictionary
+      }
+    },
+    "student2":{
+    "name":"abey",
+      "age":23,
+      "marks":{
+        "english":70,
+        "maths":69,
+    }
+    #concatination of dictionary
 }
-print(d)
+}
+print(d.get('student1'))
+#or
+print(d['student2'])
