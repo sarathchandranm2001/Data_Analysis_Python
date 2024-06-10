@@ -1,9 +1,15 @@
 class Sem3:
-    Class_Rep="Siv"
-    Place_rep="Gracen"
+    def __init__(self,name,role):
+        self.name=name
+        self.role=role
 
+        
+   
 
-    pass
-rep1=Sem3()
-rep2=Sem3()
-print(rep1.name)    
+classrep=Sem3("Revathi","Maintains Class Discipline")
+placementrep=Sem3("Gracen","Coodinates Placement")
+MultiSpecialityrep=Sem3("SAALIM","ALL IN ALLL----MAIN")
+Tutor=Sem3("Keerthi ","")
+print("NAME ROLE")
+print(classrep.name,classrep.role)
+print(MultiSpecialityrep.name,MultiSpecialityrep.role)
