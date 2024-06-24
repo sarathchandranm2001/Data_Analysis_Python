@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2 class="mt-5">Registration Form</h2>
+        <form id="registrationForm" target="hidden_iframe" onsubmit="submitForm();">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" class="form-control" id="phone" name="phone" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <div id="successMessage" class="alert alert-success mt-3" style="display:none;">
+            Your registration was successful!
+        </div>
+        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="formSubmitted();"></iframe>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function submitForm() {
+            var form = $('#registrationForm');
+            var url = 'https://docs.google.com/forms/d/e/1FAIpQLSfLZHK_PFcTIx_7upzyxxR92GIPPRbTDqgNMwYNT_ANxbb2UA/formResponse';
+
+            form.attr('action', url);
+
+            var formData = form.serializeArray();
+            formData.push({name: 'entry.2098250331', value: $('#name').val()});
+            formData.push({name: 'entry.1567800022', value: $('#email').val()});
+            formData.push({name: 'entry.2112353005', value: $('#phone').val()});
+
+            $.each(formData, function(i, field) {
+                $('<input>').attr({
+                    type: 'hidden',
+                    name: field.name,
+                    value: field.value
+                }).appendTo(form);
+            });
+        }
+
+        function formSubmitted() {
+            $('#successMessage').show();
+            $('#registrationForm').trigger('reset');
+        }
+    </script>
+</body>
+</html>
