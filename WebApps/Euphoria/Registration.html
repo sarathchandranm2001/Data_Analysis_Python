@@ -68,7 +68,7 @@ h2 {
 <body>
     <div class="container">
         <h2 class="mt-5">Registration Form</h2>
-        <form id="registrationForm" target="hidden_iframe" onsubmit="submitForm();">
+        <form id="registrationForm" action="YOUR_WEB_APP_URL_HERE" method="POST" target="hidden_iframe" onsubmit="submitForm();">
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" class="form-control" id="name" name="name" required>
@@ -94,22 +94,11 @@ h2 {
     <script>
         function submitForm() {
             var form = $('#registrationForm');
-            var url = 'https://docs.google.com/forms/d/e/1FAIpQLSfLZHK_PFcTIx_7upzyxxR92GIPPRbTDqgNMwYNT_ANxbb2UA/formResponse';
-
-            form.attr('action', url);
 
             var formData = form.serializeArray();
             formData.push({name: 'entry.2098250331', value: $('#name').val()});
             formData.push({name: 'entry.1567800022', value: $('#email').val()});
             formData.push({name: 'entry.2112353005', value: $('#phone').val()});
-
-            $.each(formData, function(i, field) {
-                $('<input>').attr({
-                    type: 'hidden',
-                    name: field.name,
-                    value: field.value
-                }).appendTo(form);
-            });
         }
 
         function formSubmitted() {
