@@ -68,7 +68,7 @@ h2 {
 <body>
     <div class="container">
         <h2 class="mt-5">Registration Form</h2>
-        <form id="registrationForm" action="YOUR_WEB_APP_URL_HERE" method="POST" target="hidden_iframe" onsubmit="submitForm();">
+        <form id="registrationForm" action="https://script.google.com/macros/s/AKfycbwZNxQVeqG5xGdmKrX7xVQwFrmhuEJuA4EOd0q30RSt2gveTsDdyY_gcZMEFX0OW5vlqA/exec" method="POST" target="hidden_iframe" onsubmit="return submitForm();">
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" class="form-control" id="name" name="name" required>
@@ -99,11 +99,25 @@ h2 {
             formData.push({name: 'entry.2098250331', value: $('#name').val()});
             formData.push({name: 'entry.1567800022', value: $('#email').val()});
             formData.push({name: 'entry.2112353005', value: $('#phone').val()});
+
+            // Submit the form data
+            $.ajax({
+                type: 'POST',
+                url: form.attr('action'),
+                data: formData,
+                success: function(response) {
+                    // Show success message and reset form
+                    $('#successMessage').show();
+                    $('#registrationForm')[0].reset();
+                }
+            });
+
+            // Prevent default form submission
+            return false;
         }
 
         function formSubmitted() {
-            $('#successMessage').show();
-            $('#registrationForm').trigger('reset');
+            // Optional: You can add additional actions here if needed
         }
     </script>
 </body>
