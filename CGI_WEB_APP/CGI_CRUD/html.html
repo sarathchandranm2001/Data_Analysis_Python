@@ -2,35 +2,79 @@
 <html>
 <head>
     <title>Simple CRUD Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        h2 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="number"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
-<style>
-    h2 {
-        color: green;
-    }
-</style>
 <body>
-    <h2>My CGI CRUD FORM</h2> 
- 
-    <form action="create.py" method="post">
-        <input type="text" name="username" placeholder="Username" required> 
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="submit" name="Submit" value="Create"> 
-    </form>
+    <div class="container">
+        <h2>My CGI CRUD FORM</h2> 
 
-    <form action="update.py" method="post">
-        <input type="number" name="id" placeholder="ID" required>
-        <input type="text" name="username" placeholder="New Username" required> 
-        <input type="email" name="email" placeholder="New Email" required>
-        <input type="submit" name="Submit" value="Update"> 
-    </form>
+        <form action="create.py" method="post">
+            <input type="text" name="username" placeholder="Username" required> 
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="submit" name="Submit" value="Create"> 
+        </form>
 
-    <form action="delete.py" method="post">
-        <input type="number" name="id" placeholder="ID" required>
-        <input type="submit" name="Submit" value="Delete"> 
-    </form>
+        <form action="update.py" method="post">
+            <input type="number" name="id" placeholder="ID" required>
+            <input type="text" name="username" placeholder="New Username" required> 
+            <input type="email" name="email" placeholder="New Email" required>
+            <input type="submit" name="Submit" value="Update"> 
+        </form>
 
-    <form action="read.py" method="get">
-        <input type="submit" name="Submit" value="Read All Records"> 
-    </form>
+        <form action="delete.py" method="post">
+            <input type="number" name="id" placeholder="ID" required>
+            <input type="submit" name="Submit" value="Delete"> 
+        </form>
+
+        <form action="read.py" method="get">
+            <input type="submit" name="Submit" value="Read All Records"> 
+        </form>
+    </div>
 </body>
 </html>
