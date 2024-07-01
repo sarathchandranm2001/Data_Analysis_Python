@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!C:\Users\sarath\AppData\Local\Programs\Python\Python312\python.exe
 
 import cgi
 import mysql.connector
