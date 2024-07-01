@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple CRUD Form</title>
+</head>
+<style>
+    h2 {
+        color: green;
+    }
+</style>
+<body>
+    <h2>My CGI CRUD FORM</h2> 
+ 
+    <form action="create.py" method="post">
+        <input type="text" name="username" placeholder="Username" required> 
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="submit" name="Submit" value="Create"> 
+    </form>
+
+    <form action="update.py" method="post">
+        <input type="number" name="id" placeholder="ID" required>
+        <input type="text" name="username" placeholder="New Username" required> 
+        <input type="email" name="email" placeholder="New Email" required>
+        <input type="submit" name="Submit" value="Update"> 
+    </form>
+
+    <form action="delete.py" method="post">
+        <input type="number" name="id" placeholder="ID" required>
+        <input type="submit" name="Submit" value="Delete"> 
+    </form>
+
+    <form action="read.py" method="get">
+        <input type="submit" name="Submit" value="Read All Records"> 
+    </form>
+</body>
+</html>
