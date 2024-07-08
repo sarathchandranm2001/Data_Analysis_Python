@@ -26,10 +26,13 @@ try:
     cursor.execute("SELECT * FROM users")
     rows = cursor.fetchall()
 
-    # Display records
+    # Display records in a table
     print("<h2>Users</h2>")
+    print("<table border='1'>")
+    print("<tr><th>ID</th><th>Username</th><th>Email</th></tr>")
     for row in rows:
-        print(f"<p>ID: {row[0]}, Username: {row[1]}, Email: {row[2]}</p>")
+        print(f"<tr><td>{row[0]}</td><td>{row[1]}</td><td>{row[2]}</td></tr>")
+    print("</table>")
 
 except mysql.connector.Error as err:
     print(f"<p>Error: {err}</p>")

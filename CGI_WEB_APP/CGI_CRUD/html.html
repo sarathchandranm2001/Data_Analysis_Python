@@ -48,33 +48,86 @@
         input[type="submit"]:hover {
             background-color: #45a049;
         }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
     </style>
+    <script>
+        function displayData() {
+            // Fetch and display data
+            fetch('read.py')
+                .then(response => response.json())
+                .then(data => {
+                    const table = document.getElementById('data-table');
+                    table.innerHTML = '<tr><th>ID</th><th>Username</th><th>Email</th><th>Actions</th></tr>';
+                    data.forEach(row => {
+                        const rowElement = document.createElement('tr');
+                        rowElement.innerHTML = `
+                            <td>${row.id}</td>
+                            <td>${row.username}</td>
+                            <td>${row.email}</td>
+                            <td>
+                                <form action="update.py" method="post" style="display:inline;">
+                                    <input type="hidden" name="id" value="${row.id}">
+                                    <input type="text" name="username" placeholder="New Username" required>
+                                    <input type="email" name="email" placeholder="New Email" required>
+                                    <input type="submit" value="Update">
+                                </form>
+                                <form action="delete.py" method="post" style="display:inline;">
+                                    <input type="hidden" name="id" value="${row.id}">
+                                    <input type="submit" value="Delete">
+                                </form>
+                            </td>
+                        `;
+                        table.appendChild(rowElement);
+                    });
+                });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('create-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                const formData = new FormData(this);
+                fetch('create.py', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.text())
+                .then(result => {
+                    alert('Record created successfully');
+                    displayData();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            });
+
+            displayData();
+        });
+    </script>
 </head>
 <body>
     <div class="container">
-        <h2>My CGI CRUD FORM</h2> 
+        <h2>My CGI CRUD FORM</h2>
 
-        <form action="create.py" method="post">
-            <input type="text" name="username" placeholder="Username" required> 
+        <form id="create-form">
+            <input type="text" name="username" placeholder="Username" required>
             <input type="email" name="email" placeholder="Email" required>
-            <input type="submit" name="Submit" value="Create"> 
+            <input type="submit" name="Submit" value="Create">
         </form>
 
-        <form action="update.py" method="post">
-            <input type="number" name="id" placeholder="ID" required>
-            <input type="text" name="username" placeholder="New Username" required> 
-            <input type="email" name="email" placeholder="New Email" required>
-            <input type="submit" name="Submit" value="Update"> 
-        </form>
-
-        <form action="delete.py" method="post">
-            <input type="number" name="id" placeholder="ID" required>
-            <input type="submit" name="Submit" value="Delete"> 
-        </form>
-
-        <form action="read.py" method="get">
-            <input type="submit" name="Submit" value="Read All Records"> 
-        </form>
+        <table id="data-table">
+            <!-- Data will be dynamically inserted here -->
+        </table>
     </div>
 </body>
 </html>
