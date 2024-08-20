@@ -2,6 +2,10 @@ import qrcode
 from PIL import Image
 
 def create_qr_code(data, output_file):
+    # Ensure the output file name ends with .png
+    if not output_file.endswith(".png"):
+        output_file += ".png"
+
     # Create QR code
     qr = qrcode.QRCode(
         version=1,
@@ -25,13 +29,13 @@ def main():
 
     # Determine whether the input is a URL or an image
     if input_data.startswith("http://") or input_data.startswith("https://"):
-        output_file = "qrcode.png"
+        output_file = input("Enter name for QR code: ")
         create_qr_code(input_data, output_file)
     else:
         try:
             img = Image.open(input_data)
             img.show()  # Display the image (optional)
-            output_file = "qrcode_from_image.png"
+            output_file = input("Enter name for QR code: ")
             create_qr_code(input_data, output_file)
         except Exception as e:
             print(f"Error: {e}. Please provide a valid URL or image file path.")
